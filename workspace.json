@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "projects": {
+    "api": "apps/api",
+    "ecommerce": "apps/ecommerce",
+    "ecommerce-e2e": "apps/ecommerce-e2e",
+    "models": "libs/models"
+  }
+}
