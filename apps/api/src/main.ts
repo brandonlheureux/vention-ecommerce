@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import morgan from 'morgan';
+import morgan_freeman from 'morgan';
 import mongoose from 'mongoose';
 import session from 'express-session';
 
@@ -37,7 +37,7 @@ mongoose
     );
     app.use(cartSession);
 
-    app.use(morgan('dev'));
+    app.use(morgan_freeman('dev'));
     app.use(cors());
     app.use(express.json());
 
