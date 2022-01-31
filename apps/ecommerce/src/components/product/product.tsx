@@ -1,4 +1,5 @@
 import { IProduct } from '@ecommerce/models';
+
 import {
   Typography,
   CardMedia,
@@ -10,6 +11,7 @@ import {
 } from '@mui/material';
 import { useState } from 'react';
 import { formatPrice } from '../../utils/formatPrice';
+import SubmitReview from '../submit-review/submit-review';
 
 import {
   AddRatingButton,
@@ -28,12 +30,11 @@ export interface ProductProps {
   delay: number;
 }
 
-export function Product({
-  product: { avgRating, imageUrl, name, price },
-  delay,
-}: ProductProps) {
+export function Product({ product, delay }: ProductProps) {
+  const { avgRating, imageUrl, name, price } = product;
   const [isInCart, setIsInCart] = useState(false);
   const [cartActionText, setCartActionText] = useState('Add to cart');
+  const [openModal, setOpenModal] = useState(false);
 
   const handleCartAction = () => {
     // should be controlled through the redux store
@@ -77,12 +78,17 @@ export function Product({
             <Price>{formatPrice(price)}</Price>
             <RatingContainer>
               <AddRatingButton
-                onClick={() => console.log('activate rating modal')}
+                onClick={() => setOpenModal(true)}
                 variant="outlined"
               >
                 Add Rating
               </AddRatingButton>
               <Rating precision={0.5} size="small" readOnly value={avgRating} />
+              <SubmitReview
+                open={openModal}
+                setOpen={setOpenModal}
+                product={product}
+              />
             </RatingContainer>
           </Content>
         </ProductCard>

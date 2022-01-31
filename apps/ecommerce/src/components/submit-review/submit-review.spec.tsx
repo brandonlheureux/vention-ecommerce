@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
 
-import Rating from './rating';
+import SubmitReview from './submit-review';
 
-describe('Rating', () => {
+describe('SubmitReview', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<Rating />);
+    const { baseElement } = render(<SubmitReview />);
     expect(baseElement).toBeTruthy();
   });
 });
