@@ -34,12 +34,11 @@ This project uses node 16 & npm 8
   $ npm install
 ```
 
-2. Configure .env for MongoDB, Express-Sessions & Cloudinary
+2. Configure .env for MongoDB & Express-Sessions
 
 ```
   MONGO_DB_URL=<mongo db uri>
   SUPER_DUPER_TOP_SECRET_SECURE_KEY=<express session secret key here>
-  CLOUDINARY_CLOUD_NAME=<cloudinary cloud name>
 ```
 
 3. Start the api and ecommerce website, this will execute a parallel NX serve command. You will need to fill the .env of the api with a proper MongoDB connection.
@@ -71,7 +70,7 @@ There is no need to track users, we assume there is a new user per client sessio
 
 There is also no need to keep an inventory count.
 
-We DO NOT want to store images in a mongo db database. Therefore, we will use Cloudinary CDN to host images.
+We DO NOT want to store images in a mongo db database. We will keep relative image paths instead and store them in the assets folder.
 
 Therefore, we end up with 3 models for both our client and api to work with:
 

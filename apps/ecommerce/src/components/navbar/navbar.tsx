@@ -1,17 +1,15 @@
-import styled from '@emotion/styled';
+import { AppBar, Stack, Container } from '@mui/material';
 
 /* eslint-disable-next-line */
 export interface NavbarProps {}
 
-const StyledNavbar = styled.div`
-  color: pink;
-`;
-
 export function Navbar(props: NavbarProps) {
   return (
-    <StyledNavbar>
-      <h1>Welcome to Navbar!</h1>
-    </StyledNavbar>
+    <AppBar position="static">
+      <Container maxWidth="lg">
+        <h1>Warriors of the key</h1>
+      </Container>
+    </AppBar>
   );
 }
 
