@@ -65,11 +65,13 @@ export const createProduct: RequestHandler = async (req, res) => {
 export const addReview: RequestHandler = async (req, res) => {
   const { id } = req.params;
   const rating = parseFloat(req.body.rating);
-  if (!rating || rating < 0 || rating > 5) {
-    throw new Error('Rating must be a number between 0 and 5');
-  }
   let status = 500;
   try {
+    if ((!rating && rating !== 0) || rating < 0 || rating > 5) {
+      console.log(rating);
+      status = 400;
+      throw new Error('Rating must be a number between 0 and 5');
+    }
     const documents = await Product.aggregate([
       { $match: { _id: id } },
       {

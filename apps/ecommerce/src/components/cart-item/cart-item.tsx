@@ -12,6 +12,10 @@ import { Edit, Check, Delete } from '@mui/icons-material';
 
 import { useState } from 'react';
 import { formatPrice } from '../../utils/formatPrice';
+import {
+  useRemoveCartItemMutation,
+  useUpdateCartItemMutation,
+} from '../../redux/services/api';
 
 export interface CartItemProps {
   item: ICartItem;
@@ -21,7 +25,9 @@ export const CartItem = ({
   item: { name, imageUrl, price, count, _id },
 }: CartItemProps) => {
   const [editing, setEditing] = useState(false);
-  const [itemCount, setItemCount] = useState(0);
+  const [itemCount, setItemCount] = useState(count);
+  const [updateCartItem] = useUpdateCartItemMutation();
+  const [removeCartItem] = useRemoveCartItemMutation();
 
   const handleChangeCount = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
@@ -29,10 +35,12 @@ export const CartItem = ({
   };
 
   const handleSubmitCount = () => {
+    updateCartItem({ newCount: itemCount, id: _id });
     setEditing(false);
   };
 
   const handleDelete = () => {
+    removeCartItem(_id);
     console.log('remove item by id: ' + _id);
   };
 

@@ -9,7 +9,14 @@ import {
   Fade,
   Grow,
 } from '@mui/material';
-import { useState } from 'react';
+
+import { useEffect, useState } from 'react';
+import { useAppSelector } from '../../redux/hooks';
+
+import {
+  useAddCartItemMutation,
+  useRemoveCartItemMutation,
+} from '../../redux/services/api';
 import { formatPrice } from '../../utils/formatPrice';
 import SubmitReview from '../submit-review/submit-review';
 
@@ -28,26 +35,41 @@ import {
 export interface ProductProps {
   product: IProduct;
   delay: number;
+  refetch: () => void;
 }
 
-export function Product({ product, delay }: ProductProps) {
+export function Product({ product, delay, refetch }: ProductProps) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const state: any = useAppSelector((state) => state.api.queries);
   const { avgRating, imageUrl, name, price } = product;
-  const [isInCart, setIsInCart] = useState(false);
+  const [isInCart, setIsInCart] = useState(
+    product._id in (state?.['getCart(undefined)']?.data?.list || {})
+  );
   const [cartActionText, setCartActionText] = useState('Add to cart');
   const [openModal, setOpenModal] = useState(false);
 
+  const [removeCartItem] = useRemoveCartItemMutation();
+  const [addCartItem] = useAddCartItemMutation();
+
   const handleCartAction = () => {
-    // should be controlled through the redux store
     if (isInCart) {
-      // remove(setIsInCart)
-      setCartActionText('Add to cart');
-      setIsInCart(false);
+      removeCartItem(product._id).then((res) => {
+        setCartActionText('Add to cart');
+        setIsInCart(false);
+      });
     } else {
-      // add(setIsInCart)
-      setCartActionText('Remove from cart');
-      setIsInCart(true);
+      addCartItem(product).then((res) => {
+        setCartActionText('Remove from cart');
+        setIsInCart(true);
+      });
     }
   };
+
+  useEffect(() => {
+    setIsInCart(
+      product._id in (state?.['getCart(undefined)']?.data?.list || {})
+    );
+  }, [state, setIsInCart]);
 
   return (
     <Fade in={true} timeout={300} style={{ transitionDelay: `${delay}ms` }}>
@@ -88,6 +110,7 @@ export function Product({ product, delay }: ProductProps) {
                 open={openModal}
                 setOpen={setOpenModal}
                 product={product}
+                refetch={refetch}
               />
             </RatingContainer>
           </Content>

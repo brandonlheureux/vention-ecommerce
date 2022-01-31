@@ -1,8 +1,21 @@
-import { Box, Button, Divider, Drawer, List, Typography } from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
 import styled from '@emotion/styled';
-import { ICart } from '@ecommerce/models';
+
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Divider,
+  Drawer,
+  List,
+  Typography,
+} from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
+
 import CartItem from '../cart-item/cart-item';
+
+import { useGetCartQuery } from '../../redux/services/api';
+
+import { formatPrice } from '../../utils/formatPrice';
 
 /* eslint-disable-next-line */
 export interface CartProps {
@@ -10,33 +23,14 @@ export interface CartProps {
   toggleCart: (open: boolean) => () => void;
 }
 
-const cartData: ICart = {
-  _id: 'abc',
-  list: {
-    Adsfaa: {
-      _id: 'Adsfaa',
-      avgRating: 3.5,
-      description: 'asdfasdf',
-      imageUrl: '/assets/images/mxkeys.jpg',
-      name: 'Mx Keys',
-      price: 13000,
-      ratingCount: 10,
-      count: 1,
-    },
-    adasfa: {
-      _id: 'adasfa',
-      avgRating: 3.5,
-      description: 'asdfasdf',
-      imageUrl: '/assets/images/mxkeys.jpg',
-      name: 'Mx Keys 2',
-      price: 13000,
-      ratingCount: 10,
-      count: 1,
-    },
-  },
-};
-
 export function Cart({ open, toggleCart }: CartProps) {
+  const {
+    data: cartData = { _id: 'null', list: [] },
+    isFetching,
+    isLoading,
+    isError,
+  } = useGetCartQuery();
+
   return (
     <Drawer anchor={'right'} open={open} onClose={toggleCart(false)}>
       <DrawerContent role="presentation">
@@ -45,10 +39,9 @@ export function Cart({ open, toggleCart }: CartProps) {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-around',
-            
           }}
         >
-          <Typography variant='h6'>Shopping Cart</Typography>
+          <Typography variant="h6">Shopping Cart</Typography>
           <Button
             onClick={toggleCart(false)}
             style={{
@@ -64,9 +57,14 @@ export function Cart({ open, toggleCart }: CartProps) {
 
         <Divider />
         <List>
-          {Object.values(cartData.list).map((product) => (
-            <CartItem item={product} key={product._id} />
-          ))}
+          {isFetching || isLoading || !cartData ? (
+            <CircularProgress sx={{ margin: 'auto', display: 'block' }} />
+          ) : (
+            cartData &&
+            Object.values(cartData.list).map((product) => (
+              <CartItem item={product} key={product._id} />
+            ))
+          )}
         </List>
         <Divider sx={{ margin: 'auto 0 0 0' }} />
         <Box
@@ -81,7 +79,13 @@ export function Cart({ open, toggleCart }: CartProps) {
               padding: '1rem',
             }}
           >
-            total: ${100}
+            total:{' '}
+            {formatPrice(
+              Object.values(cartData.list).reduce(
+                (sum, { price, count }) => sum + price * count,
+                0
+              )
+            )}
           </Typography>
           <Button variant="contained" color="secondary" disabled>
             Checkout
@@ -99,7 +103,7 @@ const DrawerContent = styled(Box)`
   flex-direction: column;
   height: 100%;
   width: 100vw;
-  
+
   @media (min-width: 600px) {
     width: 400px;
   }

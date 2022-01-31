@@ -8,6 +8,7 @@ import {
   IconButton,
   Typography,
 } from '@mui/material';
+import { useAppSelector } from '../../redux/hooks';
 
 /* eslint-disable-next-line */
 export interface NavbarProps {
@@ -15,6 +16,10 @@ export interface NavbarProps {
 }
 
 export function Navbar({ toggleCart }: NavbarProps) {
+  // not sure how to use this
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const state: any = useAppSelector((state) => state.api.queries);
+
   return (
     <AppBar position="sticky">
       <Container maxWidth="lg">
@@ -37,7 +42,13 @@ export function Navbar({ toggleCart }: NavbarProps) {
             sx={{ ml: 'auto' }}
             onClick={toggleCart(true)}
           >
-            <Badge badgeContent={4} color="secondary">
+            <Badge
+              badgeContent={
+                Object.values(state?.['getCart(undefined)']?.data?.list || {})
+                  .length
+              }
+              color="secondary"
+            >
               <ShoppingBasket />
             </Badge>
           </IconButton>

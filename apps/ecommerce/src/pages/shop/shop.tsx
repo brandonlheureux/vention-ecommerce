@@ -18,8 +18,7 @@ export function Shop(props: ShopProps) {
     data: products = [],
     isLoading,
     isFetching,
-    isError,
-    isSuccess,
+    refetch,
   } = useGetProductsByPageQuery(page);
 
   const handlePageChange = (
@@ -66,7 +65,7 @@ export function Shop(props: ShopProps) {
             }}
           />
         ) : (
-          <ProductList products={products} />
+          <ProductList products={products} refetch={refetch} />
         )}
       </Box>
     </Main>
