@@ -103,3 +103,16 @@ export const addReview: RequestHandler = async (req, res) => {
     res.status(status).json({ error: error });
   }
 };
+
+export const getPages: RequestHandler = async (_, res) => {
+  try {
+    const result = await Product.countDocuments();
+    if (result && result > 0) {
+      res.status(200).json({ pages: Math.ceil(result / 20) });
+    } else {
+      res.status(404).json({ error: 'Could not find any products' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: error });
+  }
+};

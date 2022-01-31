@@ -1,18 +1,105 @@
+import { Box, Button, Divider, Drawer, List, Typography } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 import styled from '@emotion/styled';
+import { ICart } from '@ecommerce/models';
+import CartItem from '../cart-item/cart-item';
 
 /* eslint-disable-next-line */
-export interface CartProps {}
+export interface CartProps {
+  open: boolean;
+  toggleCart: (open: boolean) => () => void;
+}
 
-const StyledCart = styled.div`
-  color: pink;
-`;
+const cartData: ICart = {
+  _id: 'abc',
+  list: {
+    Adsfaa: {
+      _id: 'Adsfaa',
+      avgRating: 3.5,
+      description: 'asdfasdf',
+      imageUrl: '/assets/images/mxkeys.jpg',
+      name: 'Mx Keys',
+      price: 13000,
+      ratingCount: 10,
+      count: 1,
+    },
+    adasfa: {
+      _id: 'adasfa',
+      avgRating: 3.5,
+      description: 'asdfasdf',
+      imageUrl: '/assets/images/mxkeys.jpg',
+      name: 'Mx Keys 2',
+      price: 13000,
+      ratingCount: 10,
+      count: 1,
+    },
+  },
+};
 
-export function Cart(props: CartProps) {
+export function Cart({ open, toggleCart }: CartProps) {
   return (
-    <StyledCart>
-      <h1>Welcome to Cart!</h1>
-    </StyledCart>
+    <Drawer anchor={'right'} open={open} onClose={toggleCart(false)}>
+      <DrawerContent role="presentation">
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-around',
+            
+          }}
+        >
+          <Typography variant='h6'>Shopping Cart</Typography>
+          <Button
+            onClick={toggleCart(false)}
+            style={{
+              display: 'block',
+              padding: '0.5rem 2rem',
+            }}
+            size={'large'}
+            color="secondary"
+          >
+            <CloseIcon fontSize="large" />
+          </Button>
+        </Box>
+
+        <Divider />
+        <List>
+          {Object.values(cartData.list).map((product) => (
+            <CartItem item={product} key={product._id} />
+          ))}
+        </List>
+        <Divider sx={{ margin: 'auto 0 0 0' }} />
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-around',
+          }}
+        >
+          <Typography
+            sx={{
+              padding: '1rem',
+            }}
+          >
+            total: ${100}
+          </Typography>
+          <Button variant="contained" color="secondary" disabled>
+            Checkout
+          </Button>
+        </Box>
+      </DrawerContent>
+    </Drawer>
   );
 }
 
 export default Cart;
+
+const DrawerContent = styled(Box)`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100vw;
+  @media (min-width: 600px) {
+    width: 400px;
+  }
+`;
