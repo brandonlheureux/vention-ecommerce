@@ -46,8 +46,10 @@ you will need a collection for products following the IProduct described below.
 3. Start the api and ecommerce website, this will execute a parallel NX serve command. You will need to fill the .env of the api with a proper MongoDB connection.
 
 ```
-  $ npm serve
+  $ npm run serve
 ```
+
+This will start the react web app on port 4200 and the express server on port 3333
 
 ## Approach
 

@@ -19,7 +19,7 @@ export function Home(props: HomeProps) {
           }}
         >
           <Typography variant="h3" component="h1" textAlign={'center'}>
-            Welcome to keyboard.io!
+            Welcome to keyboards.io!
           </Typography>
           <HeroImage variant="outlined">
             <Image src="/assets/images/customKeyboard.png" />
