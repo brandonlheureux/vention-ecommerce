@@ -1,4 +1,6 @@
 import { ICartItem } from '@ecommerce/models';
+import { useState } from 'react';
+
 import {
   Avatar,
   ListItem,
@@ -10,7 +12,8 @@ import {
 } from '@mui/material';
 import { Edit, Check, Delete } from '@mui/icons-material';
 
-import { useState } from 'react';
+import { useSnackbar } from 'notistack';
+
 import { formatPrice } from '../../utils/formatPrice';
 import {
   useRemoveCartItemMutation,
@@ -28,6 +31,7 @@ export const CartItem = ({
   const [itemCount, setItemCount] = useState(count);
   const [updateCartItem] = useUpdateCartItemMutation();
   const [removeCartItem] = useRemoveCartItemMutation();
+  const { enqueueSnackbar } = useSnackbar();
 
   const handleChangeCount = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
@@ -35,12 +39,32 @@ export const CartItem = ({
   };
 
   const handleSubmitCount = () => {
-    updateCartItem({ newCount: itemCount, id: _id });
+    updateCartItem({ newCount: itemCount, id: _id })
+      .then(() =>
+        enqueueSnackbar(`Item "${name}" successfully updated`, {
+          variant: 'success',
+        })
+      )
+      .catch((error) =>
+        enqueueSnackbar('Error updating item', {
+          variant: 'error',
+        })
+      );
     setEditing(false);
   };
 
   const handleDelete = () => {
-    removeCartItem(_id);
+    removeCartItem(_id)
+      .then(() =>
+        enqueueSnackbar(`Item "${name}" successfully removed`, {
+          variant: 'success',
+        })
+      )
+      .catch((error) =>
+        enqueueSnackbar('Error removing item', {
+          variant: 'error',
+        })
+      );
     console.log('remove item by id: ' + _id);
   };
 

@@ -1,3 +1,5 @@
+import { IProduct } from '@ecommerce/models';
+import { useState } from 'react';
 import styled from '@emotion/styled';
 
 import {
@@ -10,8 +12,7 @@ import {
   CircularProgress,
 } from '@mui/material';
 import { Close, Send } from '@mui/icons-material';
-import { useState } from 'react';
-import { IProduct } from '@ecommerce/models';
+import { useSnackbar } from 'notistack';
 
 import axios from 'axios';
 
@@ -30,13 +31,16 @@ export function SubmitReview({
 }: SubmitReviewProps) {
   const [review, setReview] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
-
+  const { enqueueSnackbar } = useSnackbar();
   const handleSubmitReview = () => {
     setIsLoading(true);
     axios
       .put(`/api/products/${_id}`, { rating: review })
       .then((res) => {
         if (res.status === 201) {
+          enqueueSnackbar('Review successfully sent!', {
+            variant: 'success',
+          });
           setIsLoading(false);
           setOpen(false);
           // trigger query refetch for page #
@@ -45,6 +49,9 @@ export function SubmitReview({
         }
       })
       .catch((error) => {
+        enqueueSnackbar('Review could not be submitted.', {
+          variant: 'error',
+        });
         console.log(error);
         setIsLoading(false);
       });
