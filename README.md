@@ -46,7 +46,7 @@ you will need a collection for products following the IProduct described below.
 3. Start the api and ecommerce website, this will execute a parallel NX serve command. You will need to fill the .env of the api with a proper MongoDB connection.
 
 ```
-  $ npm start
+  $ npm serve
 ```
 
 ## Approach
@@ -113,7 +113,7 @@ both the api and frontend apps will use the models defined here.
 NodeJS + express + mongoose
 
 - morgan: for request logging when developing.
-- cors: just in case... 
+- cors: just in case...
 - mongoose: for connecting to the database with schemas based on our typescript models (MongoDB Atlas)
 - express-sessions: for saving and persiting cart. We will not connect it to a database, simply using in-memory storage is sufficient for this project.
 

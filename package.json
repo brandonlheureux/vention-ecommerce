@@ -3,8 +3,13 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "nx run-many --parallel --target=serve --projects=api,ecommerce ",
-    "build": "nx build",
+    "serve": "nx run-many --parallel --target=serve --projects=api,ecommerce ",
+    "serve:ecommerce": "nx serve ecommerce",
+    "serve:api": "nx serve api",
+    "start": "npm run build:api && node dist/apps/api/main.js",
+    "build": "nx build api ecommerce",
+    "build:api": "nx build api",
+    "build:ecommerce": "nx build ecommerce",
     "test": "nx test",
     "commit": "cz"
   },
