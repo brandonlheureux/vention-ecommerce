@@ -34,12 +34,14 @@ This project uses node 16 & npm 8
   $ npm install
 ```
 
-2. Configure .env for MongoDB & Express-Sessions
+2. Configure .env for MongoDB & Express-Sessions.
 
 ```
   MONGO_DB_URL=<mongo db uri>
   SUPER_DUPER_TOP_SECRET_SECURE_KEY=<express session secret key here>
 ```
+
+you will need a collection for products following the IProduct described below.
 
 3. Start the api and ecommerce website, this will execute a parallel NX serve command. You will need to fill the .env of the api with a proper MongoDB connection.
 
@@ -70,15 +72,15 @@ There is no need to track users, we assume there is a new user per client sessio
 
 There is also no need to keep an inventory count.
 
-We DO NOT want to store images in a mongo db database. We will keep relative image paths instead and store them in the assets folder.
+We DO NOT want to store images in a mongo db database. We will keep relative image paths instead and store them in the assets folder. An image CDN would be optimal.
 
-Therefore, we end up with 3 models for both our client and api to work with:
+We end up with 3 models for both our client and api to work with:
 
 - Product
 
   ```ts
   interface Product {
-    _id: string;
+    _id: string; //uuid
     name: string;
     description: string;
     imageUrl: string;
@@ -97,7 +99,7 @@ Therefore, we end up with 3 models for both our client and api to work with:
   }
 
   interface ICart {
-    _id: string;
+    _id: string; //uuid
     list: {
       [productId: string]: ICartItem;
     };
@@ -108,13 +110,25 @@ both the api and frontend apps will use the models defined here.
 
 ### Api
 
-NodeJS + express.
+NodeJS + express + mongoose
 
 - morgan: for request logging when developing.
-- cors
+- cors: just in case... 
 - mongoose: for connecting to the database with schemas based on our typescript models (MongoDB Atlas)
 - express-sessions: for saving and persiting cart. We will not connect it to a database, simply using in-memory storage is sufficient for this project.
 
 ### Frontend
 
-React + Redux-toolkit + MUI + cloudinary CDN (images only)
+React + Redux-toolkit + MUI + emotion
+
+- state will be manged by Redux RTK-Query and sync changes with the api.
+- notistack will provide us notifications through MUI snackbars
+- custom styling on MUI components using emotion
+
+### Tools
+
+commitizen + NX + typescript
+
+- react components generated through NX, along with the models library.
+- commitizen will allow "better" commits (i'm not an expert yet)
+- typescript to work with our models and a better bug free experience

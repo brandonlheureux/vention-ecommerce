@@ -1,0 +1,349 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2022-01-31T20:16:30.366Z",
+  "__export_source": "insomnia.desktop.app:v2021.7.2",
+  "resources": [
+    {
+      "_id": "req_1651a64c90f74e758daa4661be2b673c",
+      "parentId": "fld_676dca0bceb149d585643017f402727f",
+      "modified": 1643659644902,
+      "created": 1643434621600,
+      "url": "http://localhost:3333/products",
+      "name": "get products - paginated",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [
+        {
+          "id": "pair_6f87d1ce25bd47ad8a66081bc0598566",
+          "name": "limit",
+          "value": "20",
+          "description": "",
+          "disabled": false
+        },
+        {
+          "id": "pair_132825ddd08e4224bd0ae9e01184cf8a",
+          "name": "skip",
+          "value": "0",
+          "description": "",
+          "disabled": false
+        }
+      ],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1643434621600,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_676dca0bceb149d585643017f402727f",
+      "parentId": "wrk_6bfaee1b06194ff195e5354fa8515bcb",
+      "modified": 1643530734946,
+      "created": 1643530734946,
+      "name": "products",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1643530734946,
+      "_type": "request_group"
+    },
+    {
+      "_id": "wrk_6bfaee1b06194ff195e5354fa8515bcb",
+      "parentId": null,
+      "modified": 1643434614481,
+      "created": 1643434614481,
+      "name": "vention-ecommerce",
+      "description": "",
+      "scope": "collection",
+      "_type": "workspace"
+    },
+    {
+      "_id": "req_24f0e6b97889408a8b48dc85dd47fd69",
+      "parentId": "fld_676dca0bceb149d585643017f402727f",
+      "modified": 1643530741604,
+      "created": 1643508165677,
+      "url": "http://localhost:3333/products/286660a2-7ae6-49a6-aa97-e6e2f58be9de",
+      "name": "get single product",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1643434621550,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_44cb671854814a33ae518846927d4bd1",
+      "parentId": "fld_676dca0bceb149d585643017f402727f",
+      "modified": 1643660158008,
+      "created": 1643660145369,
+      "url": "http://localhost:3333/products/pages",
+      "name": "get pages",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1643434621525,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_4dc046c950484b0a8e668de9bd5c1838",
+      "parentId": "fld_676dca0bceb149d585643017f402727f",
+      "modified": 1643660161467,
+      "created": 1643515929302,
+      "url": "http://localhost:3333/products/286660a2-7ae6-49a6-aa97-e6e2f58be9de",
+      "name": "put review",
+      "description": "",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"rating\": 3.5\n}"
+      },
+      "parameters": [
+        {
+          "id": "pair_ca9f6c3d6a594d13bee28b10a7423c90",
+          "name": "",
+          "value": "",
+          "description": ""
+        }
+      ],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_540123b9376d415692657baa49c09af3"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1643434621500,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_9b41893f0f56463db881d9d1c4a12070",
+      "parentId": "fld_676dca0bceb149d585643017f402727f",
+      "modified": 1643659812816,
+      "created": 1643520283173,
+      "url": "http://localhost:3333/products",
+      "name": "create product",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\t\"name\": \"Blackwidow V3 10\",\n\t\t\"description\": \"Razer blackwidow v3 RGB\",\n\t\t\"imageUrl\": \"/assets/images/blackwidowv3.jpg\",\n\t\t\"price\": 23499\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_7976e178a0b941c78f9af82d4374a6ee"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1643434621450,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_230cefe2b1ce4204af56c7ffe2e205d4",
+      "parentId": "fld_43cfd658521749ec9be38f4293a4e545",
+      "modified": 1643530729058,
+      "created": 1643525024959,
+      "url": "http://localhost:3333/cart",
+      "name": "get cart",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1643530614106,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_43cfd658521749ec9be38f4293a4e545",
+      "parentId": "wrk_6bfaee1b06194ff195e5354fa8515bcb",
+      "modified": 1643530722145,
+      "created": 1643530722145,
+      "name": "cart",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1643530722145,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_47799c6407e74b10a06b7352d4951923",
+      "parentId": "fld_43cfd658521749ec9be38f4293a4e545",
+      "modified": 1643659937810,
+      "created": 1643528238619,
+      "url": "http://localhost:3333/cart",
+      "name": "add item to cart",
+      "description": "",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"product\":\n\t\t{\n\t\t\t\"_id\": \"286660a2-7ae6-49a6-aa97-e6e2f58be9de\",\n\t\t\t\"name\": \"pink flower\",\n\t\t\t\"description\": \"a pink flower\",\n\t\t\t\"imageUrl\": \"cloudinary.com/image/path\",\n\t\t\t\"price\": 1099 \n\t\t}\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_f7b4116cb5d540deac3509a507a56fab"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1643530614056,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_7fe7bf099eaf487c80e996c3630defe7",
+      "parentId": "fld_43cfd658521749ec9be38f4293a4e545",
+      "modified": 1643530730229,
+      "created": 1643530613956,
+      "url": "http://localhost:3333/cart/286660a2-7ae6-49a6-aa97-e6e2f58be9de",
+      "name": "update item count",
+      "description": "",
+      "method": "PATCH",
+      "body": {},
+      "parameters": [
+        {
+          "id": "pair_f5ebd19dd0dd4ae58be7bb273260ae1f",
+          "name": "newCount",
+          "value": "0",
+          "description": ""
+        }
+      ],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1643530614031,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_6cd56b8e6bf04300bd9fb24e81394601",
+      "parentId": "fld_43cfd658521749ec9be38f4293a4e545",
+      "modified": 1643530725418,
+      "created": 1643529882385,
+      "url": "http://localhost:3333/cart/286660a2-7ae6-49a6-aa97-e6e2f58be9de",
+      "name": "delete cart item",
+      "description": "",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1643530614006,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "env_2799444ab6519b19765578ce557618a0648fdcb2",
+      "parentId": "wrk_6bfaee1b06194ff195e5354fa8515bcb",
+      "modified": 1643434614493,
+      "created": 1643434614493,
+      "name": "Base Environment",
+      "data": {},
+      "dataPropertyOrder": null,
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1643434614494,
+      "_type": "environment"
+    },
+    {
+      "_id": "jar_2799444ab6519b19765578ce557618a0648fdcb2",
+      "parentId": "wrk_6bfaee1b06194ff195e5354fa8515bcb",
+      "modified": 1643660153139,
+      "created": 1643434614497,
+      "name": "Default Jar",
+      "cookies": [
+        {
+          "key": "connect.sid",
+          "value": "s%3Az2ZMtWVFKJbulW--8P35PIrV00yxFrDq.0ddueKmxzhSv%2Bv0jv97glPD%2BFUwigW9YiWyrkZK4W78",
+          "domain": "localhost",
+          "path": "/",
+          "httpOnly": true,
+          "hostOnly": true,
+          "creation": "2022-01-30T02:47:54.987Z",
+          "lastAccessed": "2022-01-31T20:15:53.138Z",
+          "id": "8290633427389487"
+        }
+      ],
+      "_type": "cookie_jar"
+    },
+    {
+      "_id": "spc_61fdc53c545f480b85be2244c3456a2d",
+      "parentId": "wrk_6bfaee1b06194ff195e5354fa8515bcb",
+      "modified": 1643434614484,
+      "created": 1643434614484,
+      "fileName": "vention-ecommerce",
+      "contents": "",
+      "contentType": "yaml",
+      "_type": "api_spec"
+    }
+  ]
+}
