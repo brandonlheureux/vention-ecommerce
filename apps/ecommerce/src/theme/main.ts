@@ -4,17 +4,16 @@ import { createTheme } from '@mui/material/styles';
 // A custom theme for this app
 const main = createTheme({
   palette: {
-    // primary: {
-    //   main: '#556cd6',
-    // },
-    // secondary: {
-    //   main: '#19857b',
-    // },
-    // error: {
-    //   main: red.A400,
-    // },
+    // type: 'light',
+    primary: {
+      main: '#8e5c1c',
+    },
+    secondary: {
+      main: '#7e57c2',
+    },
   },
 
+  // make sure we have access to full size when using percentages
   components: {
     MuiCssBaseline: {
       styleOverrides: {

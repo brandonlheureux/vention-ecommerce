@@ -28,7 +28,7 @@ export function SubmitReview({
   product: { name, _id },
   refetch,
 }: SubmitReviewProps) {
-  const [review, setReview] = useState(0);
+  const [review, setReview] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmitReview = () => {
@@ -92,9 +92,9 @@ export function SubmitReview({
             >
               <Rating
                 size="large"
-                precision={0.5}
+                precision={1}
                 value={review}
-                onChange={(_, val) => setReview(val || 0)}
+                onChange={(_, val) => setReview(val || 1)}
               />
               <IconButton onClick={handleSubmitReview} color="primary">
                 <Send />

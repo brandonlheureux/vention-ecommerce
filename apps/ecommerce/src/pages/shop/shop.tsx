@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Box, CircularProgress, Pagination } from '@mui/material';
+import { Box, CircularProgress, Fade, Pagination } from '@mui/material';
 
 import { ProductList } from '../../components/product-list/product-list';
 import Main from '../../layouts/main/main';
@@ -47,27 +47,29 @@ export function Shop(props: ShopProps) {
 
   return (
     <Main>
-      <Box sx={{ position: 'relative', height: '100%' }}>
-        <StyledPagination
-          count={pages}
-          page={page}
-          variant="outlined"
-          shape="rounded"
-          size="large"
-          onChange={handlePageChange}
-        />
-        {isLoading || isFetching ? (
-          <CircularProgress
-            size={'5rem'}
-            style={{
-              margin: 'auto',
-              display: 'block',
-            }}
+      <Fade timeout={300} in={true}>
+        <Box sx={{ position: 'relative', height: '100%' }}>
+          <StyledPagination
+            count={pages}
+            page={page}
+            variant="outlined"
+            shape="rounded"
+            size="large"
+            onChange={handlePageChange}
           />
-        ) : (
-          <ProductList products={products} refetch={refetch} />
-        )}
-      </Box>
+          {isLoading || isFetching ? (
+            <CircularProgress
+              size={'5rem'}
+              style={{
+                margin: 'auto',
+                display: 'block',
+              }}
+            />
+          ) : (
+            <ProductList products={products} refetch={refetch} />
+          )}
+        </Box>
+      </Fade>
     </Main>
   );
 }
@@ -77,7 +79,5 @@ export default Shop;
 const StyledPagination = styled(Pagination)`
   margin: 1rem auto;
   width: fit-content;
-  position: sticky;
   top: 1rem;
-  z-index: 10;
 `;

@@ -56,7 +56,7 @@ export function Cart({ open, toggleCart }: CartProps) {
         </Box>
 
         <Divider />
-        <List>
+        <List sx={{ overflowY: 'scroll' }}>
           {isFetching || isLoading || !cartData ? (
             <CircularProgress sx={{ margin: 'auto', display: 'block' }} />
           ) : (

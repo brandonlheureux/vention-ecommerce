@@ -22,7 +22,6 @@ export const InCartChip = styled(Chip)`
   z-index: 10;
   top: -20px;
   left: -20px;
-  background-color: gray;
   font-weight: bold;
 `;
 

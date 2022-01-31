@@ -66,9 +66,10 @@ export function Product({ product, delay, refetch }: ProductProps) {
   };
 
   useEffect(() => {
-    setIsInCart(
-      product._id in (state?.['getCart(undefined)']?.data?.list || {})
-    );
+    const inCart =
+      product._id in (state?.['getCart(undefined)']?.data?.list || {});
+    setIsInCart(inCart);
+    setCartActionText(inCart ? 'Remove from cart' : 'Add to cart');
   }, [state, setIsInCart]);
 
   return (

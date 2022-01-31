@@ -8,6 +8,7 @@ import {
   IconButton,
   Typography,
 } from '@mui/material';
+import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../redux/hooks';
 
 /* eslint-disable-next-line */
@@ -24,17 +25,25 @@ export function Navbar({ toggleCart }: NavbarProps) {
     <AppBar position="sticky">
       <Container maxWidth="lg">
         <Toolbar variant="dense">
-          <IconButton
+          {/* <IconButton
             edge="start"
             color="inherit"
             aria-label="menu"
             sx={{ mr: 2 }}
           >
             <Menu />
-          </IconButton>
-          <Typography variant="h6" color="inherit" component="div">
-            Keyboards.io
-          </Typography>
+          </IconButton> */}
+          <Link
+            to={'/'}
+            style={{
+              textDecoration: 'none',
+              color: 'inherit',
+            }}
+          >
+            <Typography variant="h6" color="inherit" component="div">
+              Keyboards.io
+            </Typography>
+          </Link>
           <IconButton
             edge="end"
             color="inherit"
