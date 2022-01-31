@@ -1,108 +1,84 @@
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { Box, CircularProgress, Pagination } from '@mui/material';
+
 import { ProductList } from '../../components/product-list/product-list';
 import Main from '../../layouts/main/main';
+import styled from '@emotion/styled';
+
+import { useGetProductsByPageQuery } from '../../redux/services/api';
 
 /* eslint-disable-next-line */
 export interface ShopProps {}
 
 export function Shop(props: ShopProps) {
+  const [pages, setPages] = useState(1);
+  const [page, setPage] = useState(1);
+  const {
+    data: products = [],
+    isLoading,
+    isFetching,
+    isError,
+    isSuccess,
+  } = useGetProductsByPageQuery(page);
+
+  const handlePageChange = (
+    event: React.ChangeEvent<unknown>,
+    value: number
+  ) => {
+    setPage(value);
+  };
+
+  // get page count
+  useEffect(() => {
+    axios
+      .get('/api/products/pages')
+      .then((res) => res.data)
+      .then((data) => setPages(data.pages))
+      .catch((error) => {
+        console.log(error);
+        // 🤷
+      });
+  }, []);
+
+  // page changes gets new data
+  useEffect(() => {
+    console.log(products);
+  }, [page, products]);
+
   return (
     <Main>
-      <ProductList
-        products={[
-          {
-            _id: 'Adsfaa',
-            avgRating: 3.5,
-            description: 'asdfasdf',
-            imageUrl: '/assets/images/mxkeys.jpg',
-            name: 'Mx Keys',
-            price: 1301234,
-            ratingCount: 10,
-          },
-          {
-            _id: 'adasfa',
-            avgRating: 3.5,
-            description: 'asdfasdf',
-            imageUrl: '/assets/images/mxkeys.jpg',
-            name: 'Mx Keys',
-            price: 1300,
-            ratingCount: 10,
-          },
-          {
-            _id: 'adssfa',
-            avgRating: 3.5,
-            description: 'asdfasdf',
-            imageUrl: '/assets/images/mxkeys.jpg',
-            name: 'Mx Keys',
-            price: 1300,
-            ratingCount: 10,
-          },
-          {
-            _id: 'adsfda',
-            avgRating: 3.5,
-            description: 'asdfasdf',
-            imageUrl: '/assets/images/mxkeys.jpg',
-            name: 'Mx Keys',
-            price: 1300,
-            ratingCount: 10,
-          },
-          {
-            _id: 'adsffa',
-            avgRating: 3.5,
-            description: 'asdfasdf',
-            imageUrl: '/assets/images/mxkeys.jpg',
-            name: 'Mx Keys',
-            price: 1300,
-            ratingCount: 10,
-          },
-          {
-            _id: 'adddsffa',
-            avgRating: 3.5,
-            description: 'asdfasdf',
-            imageUrl: '/assets/images/mxkeys.jpg',
-            name: 'Mx Keys',
-            price: 1300,
-            ratingCount: 10,
-          },
-          {
-            _id: 'aasddsfda',
-            avgRating: 3.5,
-            description: 'asdfasdf',
-            imageUrl: '/assets/images/mxkeys.jpg',
-            name: 'Mx Keys',
-            price: 1300,
-            ratingCount: 10,
-          },
-          {
-            _id: 'addfa sffa',
-            avgRating: 3.5,
-            description: 'asdfasdf',
-            imageUrl: '/assets/images/mxkeys.jpg',
-            name: 'Mx Keys',
-            price: 1300,
-            ratingCount: 10,
-          },
-          {
-            _id: 'addsafsfa',
-            avgRating: 3.5,
-            description: 'asdfasdf',
-            imageUrl: '/assets/images/mxkeys.jpg',
-            name: 'Mx Keys',
-            price: 1300,
-            ratingCount: 10,
-          },
-          {
-            _id: 'adsafsfa',
-            avgRating: 3.5,
-            description: 'asdfasdf',
-            imageUrl: '/assets/images/mxkeys.jpg',
-            name: 'Mx Keys',
-            price: 1300,
-            ratingCount: 10,
-          },
-        ]}
-      />
+      <Box sx={{ position: 'relative', height: '100%' }}>
+        <StyledPagination
+          count={pages}
+          page={page}
+          variant="outlined"
+          shape="rounded"
+          size="large"
+          onChange={handlePageChange}
+        />
+        {isLoading || isFetching ? (
+          <CircularProgress
+            size={'5rem'}
+            style={{
+              margin: 'auto',
+              display: 'block',
+            }}
+          />
+        ) : (
+          <ProductList products={products} />
+        )}
+      </Box>
     </Main>
   );
 }
 
 export default Shop;
+
+const StyledPagination = styled(Pagination)`
+  margin: 1rem auto;
+  width: fit-content;
+  position: sticky;
+  top: 1rem;
+  z-index: 10;
+`;

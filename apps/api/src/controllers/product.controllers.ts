@@ -8,7 +8,7 @@ import { RequestHandler } from 'express';
   Create single product - POST {IProduct}
   Get single product - GET /:id
   Get paginated products - GET ?limit&skip
-  Add review - PUT /:id
+  Add review - PUT /:id {rating}
 */
 
 export const getProduct: RequestHandler = async (req, res) => {
@@ -35,7 +35,7 @@ export const getProducts: RequestHandler = async (req, res) => {
   }
 };
 
-// this should not be exposed to the public
+// this should not be exposed to the public! only for dev purpose (or implement admin page & rbac)
 export const createProduct: RequestHandler = async (req, res) => {
   // here we wouldn't need to accept rating info. should default to 0;
   const { name, description, imageUrl, price } = req.body;
@@ -108,7 +108,7 @@ export const getPages: RequestHandler = async (_, res) => {
   try {
     const result = await Product.countDocuments();
     if (result && result > 0) {
-      res.status(200).json({ pages: Math.ceil(result / 20) });
+      res.status(200).json({ pages: Math.ceil(result / 9) });
     } else {
       res.status(404).json({ error: 'Could not find any products' });
     }
