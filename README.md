@@ -134,3 +134,42 @@ commitizen + NX + typescript
 - react components generated through NX, along with the models library.
 - commitizen will allow "better" commits (i'm not an expert yet)
 - typescript to work with our models and a better bug free experience
+
+
+### Reference Images:
+
+Home
+
+![image](https://user-images.githubusercontent.com/69240832/151894558-31767d46-1c0b-467a-a3c6-7a4d41d8fad5.png)
+
+Shop + selected items
+
+![image](https://user-images.githubusercontent.com/69240832/151894605-8b9c2039-8e8e-496d-ae39-6db080fc8c96.png)
+
+Hover effect on product rating input
+
+![image](https://user-images.githubusercontent.com/69240832/151894655-89046de6-2e36-458a-8de6-060924946bf4.png)
+
+rating input open
+
+![image](https://user-images.githubusercontent.com/69240832/151894676-0146ec72-b8a9-4484-8467-35f2d01096c0.png)
+
+rating submitted
+
+![image](https://user-images.githubusercontent.com/69240832/151894706-47c10ff8-5b42-4179-9df5-e2f0ea4ae07e.png)
+
+second page with cart open
+
+![image](https://user-images.githubusercontent.com/69240832/151894740-b458f003-5223-43ca-9875-0c0dfc24ecc7.png)
+
+editing cart quantities
+
+![image](https://user-images.githubusercontent.com/69240832/151894777-d1f09bc6-895b-432e-a8fd-eb388e0d0f34.png)
+
+removing an item
+
+![image](https://user-images.githubusercontent.com/69240832/151894808-5bb3f043-9338-44fe-8cc6-4d071068c91e.png)
+
+
+
+
