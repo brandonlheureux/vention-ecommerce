@@ -35,10 +35,10 @@ import {
 export interface ProductProps {
   product: IProduct;
   delay: number;
-  refetch: () => void;
+  page: number;
 }
 
-export function Product({ product, delay, refetch }: ProductProps) {
+export function Product({ product, delay, page }: ProductProps) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const state: any = useAppSelector((state) => state.api.queries);
   const { avgRating, imageUrl, name, price } = product;
@@ -111,7 +111,7 @@ export function Product({ product, delay, refetch }: ProductProps) {
                 open={openModal}
                 setOpen={setOpenModal}
                 product={product}
-                refetch={refetch}
+                page={page}
               />
             </RatingContainer>
           </Content>

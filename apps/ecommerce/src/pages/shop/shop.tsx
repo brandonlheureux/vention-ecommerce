@@ -18,7 +18,6 @@ export function Shop(props: ShopProps) {
     data: products = [],
     isLoading,
     isFetching,
-    refetch,
   } = useGetProductsByPageQuery(page);
 
   const handlePageChange = (
@@ -39,11 +38,6 @@ export function Shop(props: ShopProps) {
         // 🤷
       });
   }, []);
-
-  // page changes gets new data
-  useEffect(() => {
-    console.log(products);
-  }, [page, products]);
 
   return (
     <Main>
@@ -66,7 +60,7 @@ export function Shop(props: ShopProps) {
               }}
             />
           ) : (
-            <ProductList products={products} refetch={refetch} />
+            <ProductList products={products} page={page} />
           )}
         </Box>
       </Fade>

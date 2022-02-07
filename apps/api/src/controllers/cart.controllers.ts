@@ -32,7 +32,6 @@ export const addItem: RequestHandler = async (req, res) => {
     }
     res.status(200).json({ message: 'successfully added item to cart' });
   } catch (error) {
-    console.log(product);
     res.status(500).json({ error: error });
   }
 };

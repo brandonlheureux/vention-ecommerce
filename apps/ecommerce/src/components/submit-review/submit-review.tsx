@@ -14,45 +14,36 @@ import {
 import { Close, Send } from '@mui/icons-material';
 import { useSnackbar } from 'notistack';
 
-import axios from 'axios';
+import { useSubmitProductReviewMutation } from '../../redux/services/api';
 
 export interface SubmitReviewProps {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   product: IProduct;
-  refetch: () => void;
+  page: number;
 }
 
 export function SubmitReview({
   open,
   setOpen,
   product: { name, _id },
-  refetch,
+  page,
 }: SubmitReviewProps) {
   const [review, setReview] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
+  const [submitReview] = useSubmitProductReviewMutation();
   const handleSubmitReview = () => {
     setIsLoading(true);
-    axios
-      .put(`/api/products/${_id}`, { rating: review })
-      .then((res) => {
-        if (res.status === 201) {
-          enqueueSnackbar('Review successfully sent!', {
-            variant: 'success',
-          });
-          setIsLoading(false);
-          setOpen(false);
-          // trigger query refetch for page #
-          // a bit of prop drilling, could be better organized.
-          refetch();
-        }
+    submitReview({ id: _id, rating: review, page })
+      .then(() => {
+        setIsLoading(false);
+        setOpen(false);
       })
       .catch((error) => {
         enqueueSnackbar('Review could not be submitted.', {
           variant: 'error',
         });
-        console.log(error);
         setIsLoading(false);
       });
   };

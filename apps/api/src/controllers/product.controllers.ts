@@ -57,7 +57,6 @@ export const createProduct: RequestHandler = async (req, res) => {
 
     res.status(200).json({ status: 'success', code: 201 });
   } catch (error) {
-    console.log(error);
     res.status(500).json({ status: 'error', code: 500, error });
   }
 };
@@ -68,7 +67,6 @@ export const addReview: RequestHandler = async (req, res) => {
   let status = 500;
   try {
     if (!rating || rating < 1 || rating > 5) {
-      console.log(rating);
       status = 400;
       throw new Error('Rating must be a number between 1 and 5');
     }
@@ -97,8 +95,6 @@ export const addReview: RequestHandler = async (req, res) => {
     if (!result) {
       throw new Error('Could not update document');
     }
-
-    console.log(result);
 
     res.status(201).json({ message: 'rating added successfully' });
   } catch (error) {

@@ -11,7 +11,8 @@
     "build:api": "nx build api",
     "build:ecommerce": "nx build ecommerce",
     "test": "nx test",
-    "commit": "cz"
+    "commit": "cz",
+    "demo": "npm i && npm run serve"
   },
   "private": true,
   "dependencies": {
